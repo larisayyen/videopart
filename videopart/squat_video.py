@@ -54,7 +54,7 @@ pose = mp_pose.Pose()
 
 if __name__ == "__main__":
     # For webcam input replace file name with 0.
-    file_name = 'raw_data/squat04.mp4'
+    file_name = 'raw_data/input_video/squat3.mp4'
     cap = cv2.VideoCapture(file_name)
 
     # Meta.
@@ -65,7 +65,7 @@ if __name__ == "__main__":
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
 
     # Video writer.
-    video_output = cv2.VideoWriter('squat04_output.mp4', fourcc, fps, frame_size)
+    video_output = cv2.VideoWriter('squat3_output.mp4', fourcc, fps, frame_size)
 
     while cap.isOpened():
         # Capture frames.

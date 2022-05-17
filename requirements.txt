@@ -12,12 +12,14 @@ pandas
 mediapipe==0.8.9.1
 opencv-python
 
-# tests/linter
-
+# img
+PIL
+websockets
 
 # API
-gcsfs
-s3fs
+requests
+streamlit
+
 
 # utilities
 six>=1.14

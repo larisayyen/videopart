@@ -54,7 +54,7 @@ pose = mp_pose.Pose()
 
 if __name__ == "__main__":
     # For webcam input replace file name with 0.
-    file_name = 'raw_data/hip bridge.mp4'
+    file_name = 'raw_data/input_video/hip bridge.mp4'
     cap = cv2.VideoCapture(file_name)
 
     # Meta.
