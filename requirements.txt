@@ -12,14 +12,15 @@ pandas
 mediapipe==0.8.9.1
 opencv-python
 
-# img
-PIL
-websockets
+# model
+sklearn
 
 # API
+uvicorn
 requests
 streamlit
-
+fastapi
+starlette
 
 # utilities
 six>=1.14

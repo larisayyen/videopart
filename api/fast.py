@@ -1,7 +1,6 @@
 
 import io
 import cv2
-import uvicorn
 import pickle
 import math as m
 import numpy as np
