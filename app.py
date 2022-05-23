@@ -25,11 +25,11 @@ st.header('AI Workout Assistant')
 
 # user upload
 video_file_buffer = st.file_uploader('Choose a file')
-video_file = open(video_file_buffer,'rb')
-video_bytes = video_file.read()
 
-if video_bytes is not None:
-    st.video(video_bytes, caption='Video you uploaded')
+if video_file_buffer is not None:
+    # video_file = open(video_file_buffer.filename,'rb')
+    video_bytes = video_file_buffer.read()
+    st.video(video_bytes)
     request_url = f"{local_url}/pose_video"
     if requests.post(request_url, files={'file': video_bytes}).status_code == 200:
         with st.spinner('Wait for it...'):
@@ -37,5 +37,3 @@ if video_bytes is not None:
             st.write('Please check output video.')
     else:
         st.write('Please try again.')
-else:
-    st.write('AI failed to read your video.')
