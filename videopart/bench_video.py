@@ -143,7 +143,7 @@ if __name__ == "__main__":
 
         # Determine whether good posture or bad posture.
         # The threshold angles have been set based on intuition.
-        # if left_inclination < 40 and right_inclination < 10:
+
         if (left_inclination + right_inclination) <= 200:
             bad_frames = 0
             good_frames += 1
