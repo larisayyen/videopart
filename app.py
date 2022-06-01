@@ -18,7 +18,8 @@ footer {visibility: hidden;}
 
 # API call references
 base_url = 'replace with new url'
-local_url = 'http://127.0.0.1:8000'
+local_url = 'http://localhost:8000'
+
 
 # app title and description
 st.header('iworkout video')
@@ -27,13 +28,35 @@ st.header('iworkout video')
 video_file_buffer = st.file_uploader('Choose a file', accept_multiple_files=True)
 
 if video_file_buffer:
-    video_bytes = video_file_buffer[0]
 
-    request_url = f"{local_url}/predict_video"
-    # if requests.post(request_url, files={'file': video_bytes}).status_code == 200:
+    video_bytes = video_file_buffer[0].getvalue()
+
+    #video pose prediction
+
+    predict_url = f'{local_url}/predict_video'
+
     with st.spinner('Wait for it...'):
-        pose = requests.post(request_url, files={'file': video_bytes}).json().get('workout pose')
-        if pose:
-            st.write(f'Your workout pose is: {pose}.')
+        pose = requests.post(predict_url, files={'file': video_bytes}).json()
+        pose_name = pose.get('workout pose')
+
+        if pose_name:
+            st.write(f'Your workout pose is: {pose_name}.')
+
+            option = st.selectbox('Is that correct?', ('-', 'Yes', 'No'))
+
+            if option == 'No':
+                pose = st.radio('Please choose your pose for scoring',
+                                ('bench', 'deadlift', 'squat', 'bridge', 'pushup'))
+
+                option = 'Yes'
+
+            #video annotation
+
+            if option == 'Yes':
+                with st.spinner('Wait for it...'):
+                    request_url = f'{local_url}/pose_video'
+                    pose_video = requests.post(request_url, files={'file': video_bytes},stream = True).content
+                    # st.video(pose_video)
+
         else:
-            st.write('Please try again.')
+            st.write('Sorry. AI failed to read your video.')
